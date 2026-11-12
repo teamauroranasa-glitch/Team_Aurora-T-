@@ -1,0 +1,925 @@
+body {
+            font-family: 'Inter', sans-serif;
+            background-color: #040711;
+            color: #FFFDF0;
+            overflow-x: hidden;
+            user-select: none;
+        }
+
+        /* Grand Museum Hall Background Layer */
+        .museum-bg {
+            background-image: radial-gradient(circle at center, rgba(7, 11, 25, 0.3) 0%, rgba(4, 7, 17, 0.75) 100%), 
+                              url('./Intro/intro_images/background.png');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        h1, h2, h3, .font-display {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Glassmorphism Panels styled like the light navy arch pop-up box */
+        .glass-panel {
+            background: rgba(22, 33, 62, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 2px solid #D4AF37;
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.7), 0 0 30px rgba(212, 175, 55, 0.25);
+        }
+
+        .glass-panel-gold {
+            background: rgba(22, 33, 62, 0.94);
+            backdrop-filter: blur(20px);
+            border: 2px solid #FFD700;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.4), inset 0 0 20px rgba(255, 215, 0, 0.15);
+        }
+
+        /* Glow utilities */
+        .glow-gold {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+        }
+        
+        .glow-gold-lg {
+            box-shadow: 0 0 35px rgba(255, 215, 0, 0.6);
+        }
+
+        .text-glow-gold {
+            text-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #070B19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #142042;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FFD700;
+        }
+
+        /* Animations */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+        }
+
+        @keyframes floatExpressive {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-14px) scale(1.02); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.4; filter: drop-shadow(0 0 8px rgba(255,215,0,0.4)); }
+            50% { opacity: 0.8; filter: drop-shadow(0 0 20px rgba(255,215,0,0.8)); }
+        }
+
+        .animate-float {
+            animation: floatSlow 5s ease-in-out infinite;
+        }
+
+        .animate-prova {
+            animation: floatExpressive 4s ease-in-out infinite;
+        }
+
+        .animate-pulse-glow {
+            animation: pulseGlow 3s infinite;
+        }
+
+        /* Screen Transitions */
+        .screen-container {
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .screen-hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.96) translateY(12px);
+            position: absolute;
+            width: 100%;
+        }
+        .screen-active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1) translateY(0);
+            position: relative;
+            width: 100%;
+        }
+
+        .intro-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+            align-items: center;
+            gap: clamp(1rem, 3vw, 3rem);
+            width: 100%;
+        }
+
+        .intro-visual {
+            position: relative;
+            align-self: stretch;
+            min-height: 34rem;
+            overflow: hidden;
+            border-radius: 2rem;
+            transform: perspective(1400px) rotateY(3deg) translateZ(0);
+            transform-origin: right center;
+            box-shadow: 1.25rem 1.5rem 2.5rem rgba(0, 0, 0, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .intro-visual::after {
+            position: absolute;
+            inset: 0;
+            content: "";
+            pointer-events: none;
+            background:
+                linear-gradient(90deg, transparent 48%, rgba(4, 7, 17, 0.9) 100%),
+                linear-gradient(0deg, #040711 0%, transparent 22%, transparent 88%, #040711 100%),
+                linear-gradient(90deg, #040711 0%, transparent 9%);
+        }
+
+        .intro-visual img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+            filter: saturate(1.08) drop-shadow(0 0 2rem rgba(63, 160, 255, 0.2));
+        }
+
+        .intro-panel {
+            width: 100%;
+            max-width: 46rem;
+            justify-self: end;
+            background: rgba(5, 17, 38, 0.83);
+            border: 2px solid rgba(103, 163, 232, 0.8);
+            border-radius: 2rem 3rem 2rem 3rem;
+            transform: perspective(1400px) rotateY(-2deg) rotateX(0.7deg) translateZ(0);
+            transform-origin: left center;
+            box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.48), 0 0 35px rgba(47, 134, 226, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.14), inset 0 -1rem 2rem rgba(2, 8, 24, 0.24);
+        }
+
+        .explorer-portrait {
+            width: 7rem;
+            height: 7rem;
+        }
+
+        .explorer-portrait img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            mix-blend-mode: screen;
+            filter: drop-shadow(0 0 0.75rem rgba(88, 174, 255, 0.24));
+        }
+
+        #screen1 .grid > .explorer-selected {
+            border-color: #FFD700;
+            background: rgba(7, 11, 25, 0.88);
+            box-shadow: 0 0 1.5rem rgba(255, 215, 0, 0.3);
+            opacity: 1;
+        }
+
+        #screen1 .grid > [role="button"]:focus-visible {
+            outline: 3px solid #FFE875;
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 600px) {
+            .intro-panel {
+                max-width: 42rem;
+                margin-inline: auto;
+                border-radius: 1.5rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .intro-panel {
+                padding: 1.25rem;
+            }
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100vw;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            height: 100vh;
+            height: 100dvh;
+            min-height: 0;
+        }
+
+        .onboarding-header {
+            flex: 0 0 auto;
+            padding-block: clamp(0.35rem, 1.5vh, 1.5rem);
+        }
+
+        .onboarding-stage {
+            flex: 1 1 auto;
+            min-height: 0;
+            width: 100vw;
+            margin-block: 0;
+            padding: clamp(0.25rem, 1.2vh, 1rem) clamp(0.75rem, 2vw, 2rem);
+        }
+
+        .onboarding-stage > .screen-container {
+            width: 100%;
+            max-height: 100%;
+        }
+
+        .onboarding-stage > #screen1.screen-active {
+            display: grid;
+        }
+
+        .intro-layout {
+            max-height: 100%;
+        }
+
+        .intro-visual {
+            min-height: 0;
+        }
+
+        #screen1 .intro-panel,
+        #screen2 .screen2-panel {
+            transform-style: preserve-3d;
+            box-shadow: 0 1.5rem 3.25rem rgba(0, 0, 0, 0.48), 0 0 1.5rem rgba(212, 175, 55, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.16), inset 0 -0.75rem 1.5rem rgba(2, 8, 24, 0.25);
+        }
+
+        #screen2 .screen2-panel {
+            transform: perspective(1200px) rotateX(1deg) translateZ(0);
+        }
+
+        #screen1 .intro-panel {
+            max-height: 100%;
+            padding: clamp(0.75rem, 2.5vh, 2.5rem);
+        }
+
+        .onboarding-footer {
+            flex: 0 0 auto;
+            padding-block: clamp(0.25rem, 0.9vh, 1rem);
+            line-height: 1.25;
+        }
+
+        #screen2 .screen2-panel {
+            width: min(100%, 54rem);
+            max-height: 100%;
+            padding: clamp(0.75rem, 2.5vh, 2.5rem);
+            display: flex;
+            flex-direction: column;
+        }
+
+        #screen2 .prova-row {
+            align-items: center;
+            gap: clamp(0.5rem, 2vh, 2rem);
+            margin-block: clamp(0.25rem, 1vh, 0.75rem);
+        }
+
+        #screen2 .prova-avatar {
+            width: clamp(4.5rem, 16vh, 11rem);
+            height: auto;
+            aspect-ratio: 1;
+        }
+
+        #screen2 .prova-avatar > img:first-child {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            mix-blend-mode: screen;
+            filter: drop-shadow(0 0 1.25rem rgba(86, 155, 255, 0.3));
+        }
+
+        #screen2 .speech-panel {
+            min-height: 0;
+            padding: clamp(0.75rem, 2vh, 1.5rem);
+        }
+
+        #screen2 #invitationMessage {
+            font-size: clamp(0.875rem, 1.8vh, 1.125rem);
+            line-height: 1.45;
+        }
+
+        #screen2 .screen2-action {
+            margin-top: clamp(0.5rem, 1.8vh, 1.5rem);
+        }
+
+        #screen2 .screen2-action button {
+            padding-block: clamp(0.65rem, 1.5vh, 1rem);
+        }
+
+        @media (max-width: 1100px), (max-height: 800px) {
+            body > main.onboarding-stage > #screen1.screen-active.intro-layout {
+                display: grid;
+                grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+                gap: clamp(0.5rem, 1.4vw, 1rem);
+            }
+
+            .intro-visual {
+                display: block;
+                min-height: 0;
+            }
+
+            #screen1 .intro-panel {
+                width: min(100%, 46rem);
+                max-width: none;
+                margin-inline: 0;
+                transform: perspective(1400px) rotateY(-1deg) rotateX(0.5deg) translateZ(0);
+            }
+        }
+
+        @media (max-height: 800px) {
+            .onboarding-header {
+                padding-block: clamp(0.25rem, 0.8vh, 0.5rem);
+            }
+
+            .onboarding-header > div:first-child {
+                padding: 0.35rem 0.65rem;
+            }
+
+            .onboarding-header > div:first-child svg {
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+
+            #screen1 .intro-panel {
+                padding: clamp(0.5rem, 1.5vh, 0.9rem);
+            }
+
+            #screen1 .intro-panel > div:first-child {
+                margin-bottom: clamp(0.25rem, 0.8vh, 0.5rem);
+            }
+
+            #screen1 h1 {
+                font-size: clamp(1.4rem, 4vh, 2.5rem);
+                line-height: 1.05;
+            }
+
+            #screen1 h1 + p {
+                margin-bottom: clamp(0.35rem, 1.2vh, 0.75rem);
+                font-size: clamp(0.875rem, 2.2vh, 1.125rem);
+            }
+
+            #screen1 input {
+                padding-block: clamp(0.55rem, 1.5vh, 0.8rem);
+            }
+
+            #screen1 .intro-panel > div.max-w-xl:last-child {
+                margin-top: clamp(0.5rem, 1.4vh, 0.9rem);
+                padding-top: clamp(0.4rem, 1.2vh, 0.75rem);
+            }
+
+            #screen1 h2 {
+                margin-bottom: clamp(0.2rem, 0.8vh, 0.5rem);
+                font-size: clamp(1rem, 2.8vh, 1.5rem);
+                line-height: 1.2;
+            }
+
+            #screen1 .grid {
+                gap: clamp(0.35rem, 1.2vw, 0.75rem);
+                margin-bottom: clamp(0.35rem, 1.2vh, 0.75rem);
+            }
+
+            #screen1 .grid > div {
+                padding: clamp(0.25rem, 1vh, 0.65rem);
+            }
+
+            #screen1 .grid > div > div:nth-of-type(2) {
+                width: clamp(3.5rem, 10vh, 6rem);
+                height: auto;
+                aspect-ratio: 1;
+                margin-bottom: 0.15rem;
+            }
+
+            #screen1 .explorer-portrait {
+                width: clamp(3.5rem, 10vh, 6rem);
+                height: clamp(3.5rem, 10vh, 6rem);
+            }
+
+            #screen1 .grid h3 {
+                font-size: clamp(0.875rem, 2.2vh, 1.125rem);
+            }
+
+            #screen1 #btnContinueToInvitation {
+                padding-block: clamp(0.55rem, 1.5vh, 0.85rem);
+            }
+
+            #screen2 .prova-row {
+                flex-direction: row;
+            }
+
+            #screen2 .prova-avatar {
+                width: clamp(3.5rem, 12vh, 6rem);
+            }
+
+            #screen2 .flex-grow {
+                min-width: 0;
+            }
+
+            #screen2 .screen2-panel .text-right {
+                margin-top: clamp(0.25rem, 0.8vh, 0.5rem);
+            }
+
+        }
+
+        @media (max-width: 600px) {
+            .onboarding-header {
+                padding-inline: clamp(0.5rem, 2vw, 1rem);
+            }
+
+            .onboarding-header > div:first-child {
+                gap: 0.5rem;
+                padding: 0.35rem 0.6rem;
+            }
+
+            .onboarding-header > div:first-child span:last-child {
+                font-size: clamp(0.65rem, 2.8vw, 0.875rem);
+            }
+
+            .onboarding-stage {
+                padding-inline: clamp(0.5rem, 2vw, 1rem);
+            }
+
+            .onboarding-footer {
+                font-size: clamp(0.55rem, 2.5vw, 0.75rem);
+            }
+
+            body > main.onboarding-stage > #screen1.screen-active.intro-layout {
+                grid-template-columns: minmax(0, 1fr);
+                grid-template-rows: clamp(3.25rem, 9vh, 5rem) minmax(0, 1fr);
+                gap: clamp(0.25rem, 0.8vh, 0.5rem);
+            }
+
+            #screen1 .intro-visual {
+                width: min(100%, 18rem);
+                justify-self: center;
+                border-radius: 0.75rem;
+                transform: perspective(1000px) rotateX(1deg) translateZ(0);
+            }
+
+            #screen1 .intro-visual::after {
+                background: linear-gradient(0deg, rgba(4, 7, 17, 0.7), transparent 60%);
+            }
+
+            #screen1 .intro-panel {
+                width: 100%;
+                min-height: 0;
+                padding: clamp(0.5rem, 1.5vh, 0.9rem);
+                transform: perspective(1000px) rotateX(0.5deg) translateZ(0);
+            }
+        }
+
+        @media (max-width: 600px) and (max-height: 700px) {
+            #screen2 .screen2-panel {
+                padding: 0.6rem;
+            }
+
+            #screen2 .prova-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.3rem;
+                margin-block: 0.25rem;
+            }
+
+            #screen2 .prova-avatar {
+                align-self: center;
+                width: clamp(2.5rem, 8vh, 3rem);
+                height: clamp(2.5rem, 8vh, 3rem);
+            }
+
+            #screen2 .speech-panel {
+                padding: 0.5rem 0.65rem;
+            }
+
+            #screen2 #invitationMessage {
+                font-size: clamp(0.75rem, 2.4vw, 0.84rem);
+                line-height: 1.28;
+            }
+
+            #screen2 .screen2-panel .text-right {
+                margin-top: 0.25rem;
+            }
+
+            #screen2 .screen2-action {
+                margin-top: 0.35rem;
+            }
+
+            #screen2 .screen2-action #btnAcceptInvitation {
+                padding-block: 0.5rem;
+                font-size: 0.95rem;
+            }
+
+        }
+
+        /* Step 02 narrator invitation */
+        #screen2 .screen2-panel {
+            width: min(100%, 70rem);
+            max-width: 70rem;
+            padding: clamp(1rem, 3vw, 2.5rem);
+            gap: clamp(0.75rem, 2vh, 1.5rem);
+            overflow: visible;
+            transform: none;
+        }
+
+        #screen2.screen-active {
+            min-height: 0;
+            overflow-y: auto;
+            padding-block: env(safe-area-inset-top) env(safe-area-inset-bottom);
+            padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
+        }
+
+        #screen2 .prova-row {
+            display: grid;
+            grid-template-columns: minmax(13rem, 0.78fr) minmax(0, 1.22fr);
+            align-items: center;
+            gap: clamp(1rem, 3vw, 3rem);
+            width: 100%;
+            margin: 0;
+        }
+
+        #screen2 .prova-avatar {
+            align-self: center;
+            justify-self: center;
+            width: min(100%, clamp(14rem, 31vh, 23rem));
+            height: auto;
+            aspect-ratio: auto;
+            flex: none;
+        }
+
+        #screen2 .prova-avatar > img:first-child {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            mix-blend-mode: screen;
+            filter: drop-shadow(0 1rem 1.6rem rgba(42, 105, 190, 0.3));
+        }
+
+        #screen2 .prova-conversation {
+            min-width: 0;
+            width: 100%;
+        }
+
+        #screen2 .speech-panel {
+            position: relative;
+            min-height: 0;
+            justify-content: flex-start;
+            padding: clamp(1.1rem, 2.4vw, 2rem);
+            border: 1px solid rgba(255, 216, 92, 0.66);
+            border-radius: 1.7rem 1.7rem 1.7rem 0.55rem;
+            background: linear-gradient(145deg, rgba(14, 28, 58, 0.98), rgba(7, 11, 25, 0.96));
+            box-shadow: 0 1.2rem 2.8rem rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            overflow: visible;
+        }
+
+        #screen2.screen-active .speech-panel {
+            animation: dialogueEnter 650ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+        }
+
+        #screen2.screen-active .prova-avatar > img:first-child {
+            animation: provaFloat 6s ease-in-out 0.7s infinite;
+        }
+
+        #screen2 .speech-panel::before,
+        #screen2 .speech-panel::after {
+            position: absolute;
+            top: clamp(2rem, 7vh, 4rem);
+            left: -0.82rem;
+            width: 0;
+            height: 0;
+            content: "";
+            border-top: 0.8rem solid transparent;
+            border-bottom: 0.8rem solid transparent;
+            border-right: 0.9rem solid rgba(255, 216, 92, 0.66);
+        }
+
+        #screen2 .speech-panel::after {
+            left: -0.68rem;
+            border-right-color: #101c38;
+            border-top-width: 0.7rem;
+            border-bottom-width: 0.7rem;
+        }
+
+        #screen2 #invitationMessage {
+            font-size: clamp(1rem, 1.4vw, 1.2rem);
+            line-height: 1.62;
+            margin: 0;
+        }
+
+        .screen2-step {
+            margin: 0;
+            text-align: right;
+        }
+
+        #screen2 .screen2-panel .text-right {
+            margin-top: clamp(0.75rem, 1.6vh, 1.1rem);
+        }
+
+        #screen2 .screen2-action {
+            display: flex;
+            align-items: stretch;
+            gap: clamp(0.65rem, 1.5vw, 1rem);
+            margin-top: clamp(0.75rem, 1.7vh, 1.25rem);
+        }
+
+        #screen2 .screen2-action button {
+            min-height: 3.5rem;
+            padding: 0.8rem 1.35rem;
+            border: 1px solid transparent;
+            border-radius: 1rem;
+            transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, border-color 180ms ease;
+        }
+
+        #screen2 #btnAcceptInvitation {
+            flex: 1 1 0;
+            background-image: linear-gradient(110deg, #ffe875, #ffd700 55%, #e6b800);
+        }
+
+        #screen2 #btnAcceptInvitation:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.7rem 1.7rem rgba(255, 215, 0, 0.28);
+        }
+
+        #screen2 .screen2-action button:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        #screen2 .screen2-action button:focus-visible {
+            outline: 3px solid #fff3c1;
+            outline-offset: 3px;
+        }
+
+        #screen2.screen-active .animate-prova {
+            animation: characterEnter 700ms ease-out both;
+        }
+
+        @keyframes characterEnter {
+            from { opacity: 0; transform: translateY(0.8rem) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes provaFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-0.45rem); }
+        }
+
+        @keyframes dialogueEnter {
+            from { opacity: 0; transform: translateY(0.8rem) scale(0.99); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .space-entry-transition[hidden] {
+            display: none;
+        }
+
+        .space-entry-transition {
+            position: fixed;
+            z-index: 100;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+            background: radial-gradient(circle at center, rgba(42, 67, 126, 0.97), rgba(7, 11, 25, 0.99) 58%, #02040b);
+            opacity: 0;
+            transition: opacity 400ms ease;
+        }
+
+        .space-entry-transition.is-active {
+            opacity: 1;
+        }
+
+        .space-entry-glow {
+            position: absolute;
+            z-index: 0;
+            width: min(90vw, 90vh);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 244, 202, 0.42), rgba(255, 215, 0, 0.15) 24%, transparent 68%);
+            opacity: 0;
+            transform: scale(0.08);
+        }
+
+        .space-entry-transition.is-active .space-entry-glow {
+            animation: space-entry-bloom 1.9s ease-out both;
+        }
+
+        .space-entry-message {
+            position: absolute;
+            z-index: 3;
+            top: clamp(1.5rem, 12vh, 7rem);
+            left: 50%;
+            width: max-content;
+            max-width: calc(100vw - 2rem);
+            margin: 0;
+            padding: 0.8rem 1.25rem;
+            border: 1px solid rgba(255, 231, 165, 0.85);
+            border-radius: 1.25rem;
+            color: #fff8df;
+            background: rgba(7, 11, 25, 0.88);
+            box-shadow: 0 0 1.5rem rgba(255, 215, 0, 0.24);
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(1.1rem, 3vw, 1.8rem);
+            font-weight: 600;
+            text-align: center;
+            opacity: 0;
+            transform: translateX(-50%);
+        }
+
+        .space-entry-message::after {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            content: "";
+            border-top: 0.65rem solid rgba(255, 231, 165, 0.85);
+            border-right: 0.55rem solid transparent;
+            border-left: 0.55rem solid transparent;
+            transform: translateX(-50%);
+        }
+
+        .space-entry-transition.is-active .space-entry-message {
+            animation: space-message-arrive 500ms ease-out 350ms both;
+        }
+
+        .space-entry-character {
+            position: relative;
+            z-index: 1;
+            display: block;
+            width: min(54vw, 48vh, 25rem);
+            max-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 2rem);
+            object-fit: contain;
+            opacity: 0;
+            transform: translateY(1.25rem) scale(0.82);
+            filter: drop-shadow(0 0 2rem rgba(255, 226, 145, 0.72));
+        }
+
+        .space-entry-transition.is-active .space-entry-character {
+            animation: space-guide-arrive 1.2s cubic-bezier(0.16, 0.8, 0.24, 1) 100ms both;
+        }
+
+        .space-entry-sparkles {
+            position: absolute;
+            z-index: 2;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .space-entry-sparkle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: var(--sparkle-size);
+            height: var(--sparkle-size);
+            border-radius: 50%;
+            background: #fff8df;
+            box-shadow: 0 0 0.5rem 0.15rem rgba(255, 231, 165, 0.85), 0 0 1.3rem rgba(137, 189, 255, 0.8);
+            opacity: 0;
+        }
+
+        .space-entry-transition.is-active .space-entry-sparkle {
+            animation: space-sparkle-burst 1.5s ease-out var(--sparkle-delay) both;
+        }
+
+        @keyframes space-entry-bloom {
+            0% { opacity: 0; transform: scale(0.08); }
+            24% { opacity: 1; }
+            100% { opacity: 0.35; transform: scale(1.15); }
+        }
+
+        @keyframes space-guide-arrive {
+            0% { opacity: 0; transform: translateY(1.25rem) scale(0.82); }
+            70% { opacity: 1; transform: translateY(-0.2rem) scale(1.025); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes space-message-arrive {
+            from { opacity: 0; transform: translate(-50%, 0.6rem) scale(0.96); }
+            to { opacity: 1; transform: translate(-50%, 0) scale(1); }
+        }
+
+        @keyframes space-sparkle-burst {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.2); }
+            12% { opacity: 1; }
+            100% { opacity: 0; transform: translate(calc(-50% + var(--sparkle-x)), calc(-50% + var(--sparkle-y))) scale(0.05); }
+        }
+
+        @media (max-width: 720px) {
+            #screen2 .screen2-panel {
+                gap: clamp(0.65rem, 2vh, 1rem);
+            }
+
+            #screen2 .prova-row {
+                grid-template-columns: minmax(0, 1fr);
+                gap: clamp(0.65rem, 1.8vh, 1rem);
+            }
+
+            #screen2 .prova-avatar {
+                width: clamp(8.75rem, 36vw, 13rem);
+            }
+
+            #screen2 .speech-panel {
+                border-radius: 1.3rem;
+                padding: clamp(0.9rem, 4vw, 1.3rem);
+            }
+
+            #screen2 .speech-panel::before,
+            #screen2 .speech-panel::after {
+                top: -0.72rem;
+                left: calc(50% - 0.7rem);
+                border-top: 0;
+                border-right: 0.75rem solid transparent;
+                border-bottom: 0.82rem solid rgba(255, 216, 92, 0.66);
+                border-left: 0.75rem solid transparent;
+            }
+
+            #screen2 .speech-panel::after {
+                top: -0.58rem;
+                left: calc(50% - 0.6rem);
+                border-right-width: 0.65rem;
+                border-bottom: 0.72rem solid #101c38;
+                border-left-width: 0.65rem;
+            }
+
+            #screen2 #invitationMessage {
+                font-size: clamp(0.94rem, 4vw, 1.05rem);
+                line-height: 1.52;
+            }
+
+            #screen2 .screen2-panel .text-right {
+                display: none;
+            }
+
+            #screen2 .screen2-action {
+                gap: 0.55rem;
+                margin-top: 0.75rem;
+            }
+
+            #screen2 .screen2-action button {
+                min-height: 3.25rem;
+                padding: 0.7rem 0.8rem;
+                border-radius: 0.9rem;
+            }
+        }
+
+        @media (max-width: 600px) and (max-height: 700px) {
+            #screen2 .screen2-panel {
+                padding: 0.7rem;
+            }
+
+            #screen2 .prova-row {
+                gap: 0.55rem;
+            }
+
+            #screen2 .prova-avatar {
+                width: clamp(6.75rem, 19vh, 8rem);
+            }
+
+            #screen2 .speech-panel {
+                padding: 0.75rem 0.85rem;
+            }
+
+            #screen2 #invitationMessage {
+                font-size: clamp(0.84rem, 3.8vw, 0.9rem);
+                line-height: 1.36;
+            }
+
+            #screen2 .screen2-action button {
+                min-height: 3rem;
+                padding: 0.55rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .space-entry-transition,
+            .space-entry-transition.is-active .space-entry-glow,
+            .space-entry-transition.is-active .space-entry-character,
+            .space-entry-transition.is-active .space-entry-message,
+            .space-entry-transition.is-active .space-entry-sparkle {
+                animation-duration: 1ms !important;
+                transition-duration: 1ms !important;
+            }
+
+            #screen2.screen-active .animate-prova,
+            #screen2.screen-active .prova-avatar > img:first-child,
+            #screen2.screen-active .speech-panel {
+                animation: none;
+            }
+
+            #screen2 .screen2-action button {
+                transition: none;
+            }
+        }

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Museum of the Abandoned | Team Aurora</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            950: '#040711',
+                            900: '#070B19',
+                            800: '#0C142A',
+                            700: '#142042',
+                        },
+                        gold: {
+                            300: '#FFE875',
+                            400: '#FFD700',
+                            500: '#E6B800',
+                            600: '#C29B00',
+                        },
+                        cream: '#FFFDF0',
+                        sand: '#F0E6D2'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./Audio/background-music.css">
+</head>
+<body class="min-h-screen relative flex flex-col justify-between items-center museum-bg overflow-x-hidden">
+    <audio id="backgroundMusic" class="background-music-audio" src="./Audio/Piano.mp3" loop preload="auto"></audio>
+
+    <!-- Twinkling starfield background -->
+    <canvas id="spaceCanvas" class="fixed inset-0 z-0 pointer-events-none w-full h-full opacity-60"></canvas>
+
+    <!-- HEADER / NAVIGATION BAR -->
+    <header class="onboarding-header relative z-20 w-full max-w-7xl px-4 py-4 md:py-6 flex justify-between items-center">
+        <!-- Logo -->
+        <div class="flex items-center space-x-3 bg-navy-900/80 backdrop-blur-md border border-gold-400/30 px-4 py-2 rounded-full shadow-lg">
+            <!-- Team Aurora Logo Badge (SVG) -->
+            <svg class="w-8 h-8 text-gold-400" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="4" stroke-dasharray="6 3"/>
+                <path d="M50 15 L62 40 L90 50 L62 60 L50 85 L38 60 L10 50 L38 40 Z" fill="url(#goldGrad)"/>
+                <ellipse cx="50" cy="50" rx="40" ry="12" stroke="#4FD1C5" stroke-width="3" transform="rotate(-25 50 50)"/>
+                <defs>
+                    <linearGradient id="goldGrad" x1="10" y1="10" x2="90" y2="90">
+                        <stop offset="0%" stop-color="#FFE875"/>
+                        <stop offset="100%" stop-color="#E6B800"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <div>
+                <span class="text-xs uppercase tracking-widest text-gold-400 font-semibold block leading-none">Team Aurora</span>
+                <span class="text-sm md:text-base font-display font-bold text-cream tracking-wide">Museum of the Abandoned</span>
+            </div>
+        </div>
+
+        <!-- Mute/Sound Toggle -->
+        <button id="soundToggleBtn" onclick="toggleAudio()" class="flex items-center space-x-2 bg-navy-900/80 border border-gold-400/30 px-3 py-2 rounded-full hover:border-gold-400 transition-all text-xs text-sand">
+            <svg id="soundOnIcon" class="w-4 h-4 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+            <svg id="soundOffIcon" class="w-4 h-4 text-gray-500 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path></svg>
+            <span id="soundStatusText" class="hidden sm:inline">Audio FX</span>
+        </button>
+    </header>
+
+    <!-- MAIN VIEWPORT / SCREEN STACK -->
+    <main class="onboarding-stage relative z-10 w-full max-w-7xl px-4 py-4 my-auto flex flex-col justify-center items-center">
+
+        <!-- ========================================== -->
+        <!-- STEP 01: CHARACTER SELECTION               -->
+        <!-- ========================================== -->
+        <section id="screen1" class="screen-container screen-active intro-layout">
+            <div class="intro-visual" aria-hidden="true">
+                <img src="./Intro/intro_images/background1.png" alt="">
+            </div>
+            <div class="glass-panel intro-panel rounded-3xl p-6 sm:p-8 lg:p-10 text-center shadow-2xl relative overflow-hidden">
+                <!-- Arch emblem decoration -->
+                <div class="w-16 h-1 mx-auto bg-gradient-to-r from-transparent via-gold-400 to-transparent mb-5"></div>
+                <p class="text-xs uppercase tracking-wider text-sand/70 font-semibold">Step 01</p>
+                
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-display text-cream tracking-tight mb-2">
+                    Choose your explorer
+                </h1>
+                
+                <p class="text-sand/90 text-base sm:text-lg mb-6 max-w-md mx-auto font-medium">
+                    Enter your name and select a character to begin.
+                </p>
+
+                <!-- Name for the narrator's greeting -->
+                <div class="max-w-xl mx-auto">
+                    <div class="relative">
+                        <label for="userNameInput" class="sr-only">Your name</label>
+                        <input 
+                            type="text" 
+                            id="userNameInput" 
+                            placeholder="Enter your name"
+                            autocomplete="off"
+                            required
+                            minlength="2"
+                            maxlength="20"
+                            class="w-full pl-12 pr-5 py-4 bg-navy-950/70 text-cream text-base md:text-lg rounded-2xl border-2 border-blue-300/50 focus:border-gold-400 focus:outline-none focus:ring-4 focus:ring-gold-400/20 placeholder-sand/50 transition-all tracking-wide"
+                            oninput="validateNameInput()"
+                            onkeydown="handleNameKeydown(event)"
+                        />
+                        <svg class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-sand/80 pointer-events-none" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-4.42 0-8 2.24-8 5v2h16v-2c0-2.76-3.58-5-8-5Z"/></svg>
+                    </div>
+                </div>
+                    <div class="border-t border-gold-400/20 mt-6 pt-5">
+                        <h2 class="text-xl sm:text-2xl font-bold font-display text-cream mb-2">
+                            <span class="inline-block w-10 border-t border-sand/70 align-middle mr-3"></span>Select a character<span class="inline-block w-10 border-t border-sand/70 align-middle ml-3"></span>
+                        </h2>
+                        <div class="grid grid-cols-2 gap-3 sm:gap-4 mb-5 max-w-xl mx-auto">
+                    
+                    <!-- Avatar 1: Leo (Boy Explorer) -->
+                    <div 
+                        id="avatarCardLeo" 
+                        onclick="selectAvatar('leo')" 
+                        role="button"
+                        tabindex="0"
+                        aria-pressed="false"
+                        onkeydown="handleAvatarKeydown(event, 'leo')"
+                        class="group cursor-pointer bg-navy-900/65 border-2 border-blue-300/30 hover:border-gold-400 rounded-2xl p-2 sm:p-3 text-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_10px_25px_rgba(255,215,0,0.2)] relative overflow-hidden"
+                    >
+                        <div class="active-badge hidden absolute top-2 right-2 bg-gold-400 text-navy-950 rounded-full p-1 shadow-md">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                        </div>
+
+                        <div class="explorer-portrait mx-auto mb-1 transition-transform duration-300 group-hover:scale-105">
+                            <img src="./Intro/intro_images/Boy_character.png" alt="Boy explorer">
+                        </div>
+
+                        <h3 class="font-display text-base sm:text-lg font-bold text-cream mb-0.5">Boy</h3>
+                        <p class="text-[11px] sm:text-xs text-sand/80">The Curious Explorer</p>
+                    </div>
+
+                    <!-- Avatar 2: Maya (Girl Explorer) -->
+                    <div 
+                        id="avatarCardMaya" 
+                        onclick="selectAvatar('maya')" 
+                        role="button"
+                        tabindex="0"
+                        aria-pressed="false"
+                        onkeydown="handleAvatarKeydown(event, 'maya')"
+                        class="group cursor-pointer bg-navy-900/65 border-2 border-blue-300/30 hover:border-gold-400 rounded-2xl p-2 sm:p-3 text-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_10px_25px_rgba(255,215,0,0.2)] relative overflow-hidden"
+                    >
+                        <div class="active-badge hidden absolute top-3 right-3 bg-gold-400 text-navy-950 rounded-full p-1 shadow-md">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                        </div>
+
+                        <div class="explorer-portrait mx-auto mb-1 transition-transform duration-300 group-hover:scale-105">
+                            <img src="./Intro/intro_images/Girl_character.png" alt="Girl explorer">
+                        </div>
+
+                        <h3 class="font-display text-base sm:text-lg font-bold text-cream mb-0.5">Girl</h3>
+                        <p class="text-[11px] sm:text-xs text-sand/80">The Fearless Explorer</p>
+                    </div>
+
+                </div>
+                        <button 
+                    id="btnContinueToInvitation" 
+                    disabled 
+                    onclick="goToInvitation()"
+                    class="w-full max-w-md mx-auto py-3.5 px-8 rounded-2xl font-display font-bold text-lg md:text-xl text-navy-950 bg-gradient-to-r from-gold-300 via-gold-400 to-gold-500 hover:from-gold-400 hover:to-gold-300 disabled:opacity-40 disabled:cursor-not-allowed transform hover:-translate-y-0.5 transition-all duration-200 shadow-xl disabled:shadow-none cursor-pointer"
+                >
+                    Continue&nbsp; &rarr;
+                </button>
+                    </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- STEP 02: NARRATOR INVITATION                -->
+        <!-- ========================================== -->
+        <section id="screen2" class="screen-container screen-hidden" aria-hidden="true">
+            <div class="screen2-panel glass-panel rounded-3xl p-6 sm:p-8 md:p-10 max-w-3xl mx-auto shadow-2xl relative">
+                
+                <p class="screen2-step text-xs uppercase tracking-wider text-sand/70 font-semibold">Step 02</p>
+
+                <div class="prova-row flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8 my-2">
+                    
+                    <!-- Welcome Narrator -->
+                    <div class="prova-avatar w-36 h-36 md:w-44 md:h-44 flex-shrink-0 animate-prova relative">
+                        <img src="./Intro/intro_images/Main_character1.png" alt="Prova welcoming you with an outstretched hand">
+                    </div>
+
+                    <div class="prova-conversation">
+                        <!-- Narrator invitation -->
+                        <div class="speech-panel bg-navy-950/95 border-2 border-gold-400/50 rounded-3xl p-6 relative shadow-2xl min-h-[190px] flex flex-col justify-between">
+                            <p id="invitationMessage" class="text-cream text-base sm:text-lg leading-relaxed font-medium" aria-live="polite"></p>
+
+                            <div class="text-right mt-2">
+                                <span class="text-xs text-gold-400 uppercase tracking-widest font-semibold">Your Friend</span>
+                            </div>
+                        </div>
+
+                        <!-- Invitation response -->
+                        <div class="screen2-action">
+                            <button
+                                id="btnAcceptInvitation"
+                                onclick="goToSpaceLibrary()"
+                                class="font-display font-bold text-lg md:text-xl text-navy-950 bg-gradient-to-r from-gold-300 via-gold-400 to-gold-500 shadow-xl glow-gold cursor-pointer"
+                            >
+                                Yes, I'd love to!
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <div id="space-entry-transition" class="space-entry-transition" aria-hidden="true" hidden>
+        <div class="space-entry-sparkles"></div>
+        <div class="space-entry-glow"></div>
+        <p class="space-entry-message">Great! Let's gooo...</p>
+        <img src="./Intro/intro_images/Main_character2.png" alt="" class="space-entry-character">
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="onboarding-footer relative z-20 w-full text-center py-4 text-xs text-sand/60">
+        <p>Team Aurora &copy; Museum of the Abandoned. Designed for curious space explorers.</p>
+    </footer>
+
+    <!-- INTERACTIVE ENGINE & SOUND LOGIC -->
+    <script src="./Audio/background-music.js"></script>
+    <script src="./index.js"></script>
+</body>
+</html>
