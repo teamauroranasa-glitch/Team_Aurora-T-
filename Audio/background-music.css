@@ -1,0 +1,27 @@
+.background-music-audio {
+  display: none;
+}
+
+.background-music-toggle {
+  position: fixed;
+  z-index: 20;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  min-height: 2.75rem;
+  padding: 0.65rem 1rem;
+  border: 1px solid rgba(200, 169, 107, 0.8);
+  border-radius: 999px;
+  color: #fff4db;
+  background: rgba(7, 11, 25, 0.92);
+  box-shadow: 0 0.4rem 1.5rem rgba(0, 0, 0, 0.45);
+  font: 600 0.75rem/1.2 Arial, sans-serif;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+
+.background-music-toggle:hover,
+.background-music-toggle:focus-visible {
+  border-color: #e1cb9a;
+  outline: 2px solid #e1cb9a;
+  outline-offset: 3px;
+}
