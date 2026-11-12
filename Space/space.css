@@ -1,0 +1,63 @@
+*{box-sizing:border-box}
+:root{color-scheme:dark}
+body{margin:0;min-width:320px;min-height:100vh;background:#02040b;color:#edf1ff;font-family:Montserrat,Arial,sans-serif}
+.museum-library{min-height:100vh}
+.library-entry{position:fixed;inset:0;overflow:hidden;background:#02040b url("./space_images/bg.png") center/cover no-repeat}
+.library-scene-image{display:none}
+.library-entry::before{position:absolute;z-index:1;inset:0;content:"";pointer-events:none;background:linear-gradient(180deg,rgba(2,4,11,.35),transparent 30%,rgba(2,4,11,.1) 54%,rgba(2,4,11,.42))}
+.library-heading{position:absolute;z-index:2;top:clamp(24px,5vh,64px);left:50%;width:min(90%,720px);transform:translateX(-50%);text-align:center;text-shadow:0 2px 18px #02040b}
+.library-heading p{margin:0;color:#e3ba73;font-size:clamp(9px,1vw,12px);letter-spacing:.3em}
+.library-heading h1{margin:7px 0;color:#fff4db;font-family:Georgia,serif;font-size:clamp(30px,4vw,54px);font-weight:400;letter-spacing:.04em}
+.library-heading span{color:#e2e7fa;font-family:Georgia,serif;font-size:clamp(13px,1.4vw,18px)}
+.library-books{position:absolute;z-index:2;display:block}
+.library-book{position:absolute;display:block;padding:0;border:1px solid transparent;border-radius:10px;color:#fff4db;background:transparent;text-align:center;cursor:pointer;transition:border-color .24s ease,background-color .24s ease}
+.library-book--moon{left:6.5%;top:55%;width:29%;height:39%}
+.library-book--mars{left:38.5%;top:55%;width:28%;height:39%}
+.library-book--space{left:67%;top:55%;width:29%;height:39%}
+.library-book:hover,.library-book:focus-visible{border-color:rgba(244,199,112,.72);background:rgba(8,15,36,.12);outline:none}
+.library-book-title{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.library-book-action{position:absolute;top:61%;left:50%;display:inline-flex;min-height:40px;align-items:center;justify-content:center;padding:0 clamp(10px,1.5vw,20px);border:1px solid rgba(248,205,121,.9);border-radius:24px;color:#fff1ca;background:rgba(7,11,25,.9);font-size:clamp(8px,.8vw,11px);font-weight:700;letter-spacing:.16em;white-space:nowrap;box-shadow:0 6px 24px rgba(0,0,0,.55);transform:translateX(-50%);transition:color .2s ease,background-color .2s ease}
+.library-book:hover .library-book-action,.library-book:focus-visible .library-book-action{color:#201706;background:#f4c66b}
+.guide-welcome{width:min(900px,calc(100vw - 32px));max-width:calc(100vw - 32px);max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);padding:0;overflow:visible;border:0;color:#30281f;background:transparent}
+.guide-welcome::backdrop{background:rgba(0,0,0,.76);backdrop-filter:blur(5px)}
+.guide-welcome[open]{display:grid;grid-template-columns:minmax(180px,.85fr) minmax(0,1.15fr);align-items:center;gap:clamp(8px,2vw,24px);animation:welcome-pop .35s ease-out both}
+.guide-welcome-image{position:relative;z-index:1;display:block;width:100%;height:min(70vh,560px);object-fit:contain;object-position:center bottom;filter:drop-shadow(0 10px 24px rgba(0,0,0,.35))}
+.guide-welcome-card{position:relative;z-index:0;padding:clamp(18px,3vw,34px);border:2px solid #c8a96b;border-radius:20px;color:#30281f;background:linear-gradient(135deg,#f3ecd8,#e8ddc2);box-shadow:0 30px 90px #000}
+.guide-welcome-kicker{margin:0 0 8px;color:#80602f;font-size:clamp(9px,1vw,11px);font-weight:700;letter-spacing:.18em}
+.guide-welcome h2{margin:0 0 12px;font-family:Georgia,serif;font-size:clamp(24px,3vw,36px);font-weight:400}
+.guide-welcome #guide-welcome-message{margin:0;color:#3e382d;font-family:Georgia,serif;font-size:clamp(15px,1.5vw,18px);line-height:1.55}
+.guide-welcome-content form{margin-top:clamp(14px,2.5vh,24px)}
+.guide-welcome-dismiss{min-height:44px;padding:0 20px;border:1px solid #997743;border-radius:24px;color:#fff4db;background:#60472a;font-weight:700;cursor:pointer}
+.guide-welcome-dismiss:hover,.guide-welcome-dismiss:focus-visible{background:#80602f;outline:2px solid #c8a96b;outline-offset:3px}
+@keyframes welcome-pop{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+.book-dialog{width:min(440px,calc(100vw - 32px));padding:clamp(20px,5vw,32px);border:2px solid #c8a96b;color:#30281f;background:#f3ecd8;box-shadow:0 30px 90px #000}
+.book-dialog::backdrop{background:rgba(0,0,0,.72)}
+.book-dialog form{margin:0}
+.dialog-close{float:right;border:1px solid #997743;padding:2px 9px;color:#60472a;background:transparent;font-size:20px;cursor:pointer}
+.dialog-kicker{margin:0;color:#80602f;font-size:10px;letter-spacing:.2em}
+.book-dialog h2{margin:18px 0 8px;font-family:Georgia,serif;font-size:clamp(24px,6vw,32px);font-weight:400}
+.book-dialog #book-dialog-description{margin:0;line-height:1.55}
+@media(max-width:760px),(max-aspect-ratio:4/3){
+  .library-entry{background:#02040b}
+  .library-scene-image{position:absolute;z-index:0;inset:0;display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom;pointer-events:none}
+  .library-entry::before{z-index:0;inset:-5%;background:url("./space_images/bg.png") center/cover no-repeat;filter:blur(14px) brightness(.42);transform:scale(1.05)}
+  .library-entry::after{position:absolute;z-index:1;inset:0;content:"";pointer-events:none;background:linear-gradient(180deg,rgba(2,4,11,.25),transparent 30%,rgba(2,4,11,.28) 60%,rgba(2,4,11,.65))}
+  .library-scene-image{z-index:2}
+  .library-heading{z-index:3;top:clamp(12px,3vh,26px);width:94%}
+  .library-heading h1{margin:4px 0;font-size:clamp(23px,7vw,34px)}
+  .library-heading span{font-size:clamp(11px,3vw,14px)}
+  .library-books{z-index:3}
+  .library-book{border-radius:6px}
+  .library-book-action{top:57%;min-height:clamp(28px,5vh,36px);padding-inline:clamp(5px,1.8vw,10px);font-size:clamp(7px,2.3vw,9px);letter-spacing:.08em}
+  body .background-music-toggle{top:clamp(5.5rem,14vh,7rem);bottom:auto}
+}
+@media(max-width:600px){
+  .guide-welcome[open]{grid-template-columns:1fr;gap:8px;max-height:calc(100dvh - 24px);text-align:center}
+  .guide-welcome-image{height:clamp(110px,21vh,160px);margin:0 auto}
+  .guide-welcome-card{padding:16px;border-radius:16px}
+  .guide-welcome-kicker{margin-bottom:4px}
+  .guide-welcome h2{margin-bottom:8px;font-size:clamp(22px,6vw,28px)}
+  .guide-welcome #guide-welcome-message{font-size:clamp(14px,4vw,16px);line-height:1.4}
+  .guide-welcome-content form{margin-top:12px}
+}
+@media(prefers-reduced-motion:reduce){.library-book,.library-book-action{transition:none!important}.guide-welcome[open]{animation:none!important}}
